@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
+import { Header } from "../components/Header";
+
 const Home: NextPage = () => {
   return (
     <>
@@ -9,6 +11,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Transactions register app" />
         <link rel="icon" href="/salary.png" />
       </Head>
+
+      <Header />
 
       <main className="grid min-h-screen place-items-center text-center">
         <div>

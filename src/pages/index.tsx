@@ -21,6 +21,7 @@ const Home: NextPage = () => {
           <p>Our main goal is to make yout money control easier!</p>
         </div>
       </main>
+
     </>
   );
 };

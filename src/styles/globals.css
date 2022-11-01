@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  @apply bg-zinc-900 text-white;
+  scroll-behavior: smooth;
+}

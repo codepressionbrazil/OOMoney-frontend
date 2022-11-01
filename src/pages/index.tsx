@@ -15,11 +15,20 @@ const Home: NextPage = () => {
 
       <Header />
 
-      <main className="mt-20">
-        <section className="flex w-full justify-center">
-          <Summary title="Entradas" value={2000} />
-          <Summary title="Saídas" value={1000} />
-          <Summary title="Total" value={1000} />
+      <main className="mt-20 flex justify-center">
+        <section className="flex w-[65%] justify-between">
+          <Summary title="Entradas" value={2000} bgColor="bg-green-300" />
+          <Summary title="Saídas" value={-1000} bgColor="bg-red-300" />
+          <Summary title="Total" value={0} bgColor="bg-yellow-200" />
+        </section>
+
+        <section>
+          <div>
+            <h2 className="text-2xl font-bold">Transações</h2>
+            <p>4 transações</p>
+          </div>
+
+          
         </section>
       </main>
     </>

@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react"
-import { useRouter } from "next/router";
 
 import { FormControl } from "baseui/form-control";
 import { Input, SIZE as InputSize } from "baseui/input";
 import { Button, KIND as ButtonKind } from "baseui/button";
 
-import { api } from "../services/api";
+import { useAuth } from "../context/useAuth";
 
 export default function Cadastro(){
 
@@ -14,36 +13,36 @@ export default function Cadastro(){
   const [email, setEmail] = useState<string>('')
   const [senha, setSenha] = useState<string>('')
   const [confirmarSenha, setConfirmarSenha] = useState<string>('')
-  const [telefone, setTelefone] = useState<string>('')
-  const [cpf, setCpf] = useState<string>('')
+  const [telefone, setTelefone] = useState<number>(0)
+  const [cpf, setCpf] = useState<number>(0)
   const [usuario, setUsuario] = useState<string>('')
 
-  const router = useRouter();
+  const { execRegister } = useAuth()
 
-  async function cadastrarUsuario() {
-    const response = await api.post('/usuarios', {
+  const handleCadastro = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if(senha !== confirmarSenha){
+      alert('Senhas não conferem')
+      return
+    }
+
+    const data = {
       nome,
       email,
       senha,
-      confirmarSenha,
       telefone,
       cpf,
       usuario
-    })
-
-    if(response.status === 200) {
-      router.push('/login')
     }
 
-    if(response.status >= 400) {
-      alert('Erro ao cadastrar usuário')
-    }
-}
+    await execRegister(data)
+  }
 
   return(
     <main className="mt-1 flex flex-col justify-center items-center">
       <h1 className="text-1xl">Cadastre-se!</h1>
-      <form method="POST" className="w-[30%]">
+      <form method="POST" onSubmit={handleCadastro} className="w-[30%]">
         <FormControl label="Nome">
           <Input
             value={nome}
@@ -79,8 +78,9 @@ export default function Cadastro(){
         <FormControl label="Telefone">
           <Input
             value={telefone}
-            onChange={(e) => setTelefone(e.currentTarget.value)}
+            onChange={(e) => setTelefone(Number(e.currentTarget.value))}
             placeholder="Telefone"
+            type="number"
             size={InputSize.compact}
           />
         </FormControl>
@@ -88,8 +88,9 @@ export default function Cadastro(){
         <FormControl label="CPF">
           <Input
             value={cpf}
-            onChange={(e) => setCpf(e.currentTarget.value)}
+            onChange={(e) => setCpf(Number(e.currentTarget.value))}
             placeholder="CPF"
+            type="number"
             size={InputSize.compact}
           />
         </FormControl>
@@ -104,7 +105,7 @@ export default function Cadastro(){
         </FormControl>
         <div className="flex justify-between">
           <Button type="reset" kind={ButtonKind.secondary}>Cancelar</Button>
-          <Button type="submit" onClick={cadastrarUsuario}>Cadastrar</Button>
+          <Button type="submit">Cadastrar</Button>
         </div>
       </form>
     </main>

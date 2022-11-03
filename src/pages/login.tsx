@@ -3,10 +3,18 @@ import { Input, SIZE as InputSize } from "baseui/input";
 import { Button, SIZE as ButtonSize } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 
+import { useAuth } from "../context/useAuth";
+
 export default function Login(){
 
 	const [email, setEmail] = useState<string>('')
 	const [senha, setSenha] = useState<string>('')
+
+	const { execLogin } = useAuth()
+
+	async function handleLogin() {
+		await execLogin(email, senha)
+	}
 
 	return (
 		<>
@@ -18,6 +26,7 @@ export default function Login(){
 							value={email}
 							onChange={(e) => setEmail(e.currentTarget.value)}
 							placeholder="Email"
+							type="email"
 							size={InputSize.compact}
 						/>
 					</FormControl>
@@ -30,9 +39,15 @@ export default function Login(){
 							size={InputSize.compact}
 						/>
 					</FormControl>
-					<div className="flex justify-between">
-						<Button type="reset" size={ButtonSize.compact} >Cancelar</Button>
-						<Button type="submit" size={ButtonSize.compact} className="mt-1">Entrar</Button>
+					<div className="flex justify-between mt-1">
+						<Button type="reset" size={ButtonSize.compact}>Cancelar</Button>
+						<Button
+							type="submit"
+							size={ButtonSize.compact}
+							onClick={handleLogin}
+						>
+							Entrar
+						</Button>
 					</div>
 				</form>
 			</main>

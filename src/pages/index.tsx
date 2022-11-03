@@ -28,8 +28,6 @@ const Home: NextPage = () => {
     setNewTransactionModalOpen(false);
   }
 
-  console.log(user)
-
   if(!user) {
     if(typeof window !== 'undefined') {
       router.push('/login')

@@ -11,7 +11,7 @@ export function Header(){
 
 				<nav className="mr-4 flex space-x-1 underline">
 					<Link href="/">Home</Link>
-					<Link href="/resumo">Resumo</Link>
+					<Link href="/resumo">Gerar resumo</Link>
 				</nav>
       </header>
 		</>

@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppType } from "next/dist/shared/lib/utils";
 
 import {Provider as StyletronProvider} from 'styletron-react';
-import {LightTheme, DarkTheme, BaseProvider} from 'baseui';
+import { DarkTheme, BaseProvider} from 'baseui';
 import {styletron} from '../utils/base-ui-utils';
 
 const MyApp: AppType = ({ Component, pageProps }) => {

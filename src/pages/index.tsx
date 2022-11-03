@@ -32,12 +32,12 @@ const Home: NextPage = () => {
 
       <main className="mt-20 flex flex-col items-center">
         <section className="flex w-[65%] justify-between">
-          <Summary title="Entradas" value={2000} bgColor="bg-green-300" />
-          <Summary title="Saídas" value={-1000} bgColor="bg-red-300" />
-          <Summary title="Total" value={0} bgColor="bg-yellow-200" />
+          <Summary title="Entradas" value={2000} type="deposit" />
+          <Summary title="Saídas" value={-1000} type="withdraw" />
+          <Summary title="Total" value={0} type="total" />
         </section>
 
-        <section className="mt-2 flex justify-between w-[65%] h-10">
+        <section className="mt-8 flex justify-between w-[65%] h-10">
           <div>
             <h2 className="text-2xl font-bold">Transações</h2>
             <p>4 transações</p>

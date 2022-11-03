@@ -28,7 +28,7 @@ export function TransactionProvider({children}: any): JSX.Element {
   )
 }
 
-export function useTransaction(){
+export function useTransactions(){
   const context = useContext(TransactionContext)
 
   return context

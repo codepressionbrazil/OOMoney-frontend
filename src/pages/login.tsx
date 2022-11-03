@@ -3,7 +3,7 @@ import { Input, SIZE as InputSize } from "baseui/input";
 import { Button, SIZE as ButtonSize } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 
-import { useAuth } from "../context/useAuth";
+import { useAuth } from "../hook/useAuth";
 
 export default function Login(){
 

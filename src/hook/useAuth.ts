@@ -64,12 +64,16 @@ export function useAuth() {
   }
 
   function getUserFromSessionStorage() {
-    const user = sessionStorage.getItem("user-oo-money");
-    return user ? JSON.parse(user) : null
+    if (typeof window !== "undefined") {
+      const user = sessionStorage.getItem("user");
+      return user ? JSON.parse(user) : null;
+    }
   }
 
   function saveUserToSessionStorage(userData: User): void {
-    sessionStorage.setItem("user-oo-money", JSON.stringify(userData));
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("user", JSON.stringify(userData));
+    }
   }
 
   return { user, execRegister, execLogin, execLogout, getUserFromSessionStorage };

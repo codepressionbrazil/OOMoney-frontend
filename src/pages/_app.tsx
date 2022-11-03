@@ -5,7 +5,7 @@ import {Provider as StyletronProvider} from 'styletron-react';
 import { DarkTheme, BaseProvider} from 'baseui';
 import {styletron} from '../utils/base-ui-utils';
 
-import { TransactionProvider } from "../context/useTransaction"
+import { TransactionProvider } from "../context/useTransactions"
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

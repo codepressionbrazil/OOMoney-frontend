@@ -5,7 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Input, SIZE as InputSize } from "baseui/input";
 import { Button, KIND as ButtonKind } from "baseui/button";
 
-import { useAuth } from "../context/useAuth";
+import { useAuth } from "../hook/useAuth";
 
 export default function Cadastro(){
 

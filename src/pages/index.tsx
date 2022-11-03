@@ -8,7 +8,15 @@ import { Header } from "../components/Header";
 import { Summary } from "../components/Summary";
 import { NewTransactionModal } from "../components/NewTransactionModal";
 
+// import { useTransactions } from "../context/useTransactions";
+import { useAuth } from "../hook/useAuth";
+import { useRouter } from "next/router";
+
 const Home: NextPage = () => {
+  const router = useRouter()
+
+  // const {} = useTransactions()
+  const { user } = useAuth()
 
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
 
@@ -18,6 +26,11 @@ const Home: NextPage = () => {
 
   function closeNewTransactionModal():void {
     setNewTransactionModalOpen(false);
+  }
+
+  if(!user) {
+    console.log('user not found');
+    () => router.push('/login')
   }
 
   return (

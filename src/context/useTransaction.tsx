@@ -1,4 +1,4 @@
-import React,{ createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import React,{ createContext, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
 
 import * as types from "../types/types"
 import { api } from "../services/api"
@@ -9,7 +9,7 @@ interface TransactionContextData {
 
 const TransactionContext = createContext<TransactionContextData>({} as TransactionContextData)
 
-export function TransactionProvider(children: ReactNode){
+export function TransactionProvider({children}: any): JSX.Element {
   const [transactions, setTransactions] = useState<types.Transaction[]>([])
 
   useEffect(()=>{
@@ -22,7 +22,7 @@ export function TransactionProvider(children: ReactNode){
   }
 
   return (
-    <TransactionContext.Provider value={{ transaction }}>
+    <TransactionContext.Provider value={{ transactions }}>
       {children}
     </TransactionContext.Provider>
   )

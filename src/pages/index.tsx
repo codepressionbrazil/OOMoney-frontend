@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
 
-  function openNewTransactionModal(): void {
+  function openNewTransactionModal():void {
     setNewTransactionModalOpen(true);
   }
 
@@ -28,9 +28,12 @@ const Home: NextPage = () => {
     setNewTransactionModalOpen(false);
   }
 
+  console.log(user)
+
   if(!user) {
-    console.log('user not found');
-    () => router.push('/login')
+    if(typeof window !== 'undefined') {
+      router.push('/login')
+    }
   }
 
   return (

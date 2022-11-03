@@ -12,9 +12,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <>
       <StyletronProvider value={styletron}>
         <BaseProvider theme={DarkTheme}>
-        <TransactionProvider>
-          <Component {...pageProps} />
-        </TransactionProvider>
+          <TransactionProvider>
+            <Component {...pageProps} />
+          </TransactionProvider>
         </BaseProvider>
       </StyletronProvider>
     </>

@@ -1,27 +1,41 @@
-import type { NextPage } from "next";
+import { useState } from "react";
+import { Input, SIZE as InputSize } from "baseui/input";
+import { Button, SIZE as ButtonSize } from "baseui/button";
+import { FormControl } from "baseui/form-control";
 
+export default function Login(){
 
-const Login:NextPage = () => {
+	const [email, setEmail] = useState<string>('')
+	const [senha, setSenha] = useState<string>('')
 
 	return (
 		<>
-        <img src="" alt="" />
-        <div className="flex flex-col justify-center items-center">
-            <h1>Seja bem vindo de volta!</h1>
-        </div>
-        <form className="flex flex-col justify-center items-center">
-            <label htmlFor="email">Email</label>
-            <input type="email" className="email-login"/>
-            <label htmlFor="senha">Senha</label>
-            <input type="password" className="senha-login"/>
-            <button type="submit">Entrar</button>
-        </form>
-        <div className="flex flex-col justify-center items-center">
-            <h1>Não tem conta? Faça o cadastro!</h1>
-            <button>Cadastre-se!</button>       
-        </div>
+			<main className="mt-1 flex flex-col justify-center items-center min-h-screen">
+				<h1 className="text-1xl">Login</h1>
+				<form method="POST" className="w-[20%]">
+					<FormControl label="Email">
+						<Input
+							value={email}
+							onChange={(e) => setEmail(e.currentTarget.value)}
+							placeholder="Email"
+							size={InputSize.compact}
+						/>
+					</FormControl>
+					<FormControl label="Senha">
+						<Input
+							value={senha}
+							onChange={(e) => setSenha(e.currentTarget.value)}
+							placeholder="Senha"
+							type="password"
+							size={InputSize.compact}
+						/>
+					</FormControl>
+					<div className="flex justify-between">
+						<Button type="reset" size={ButtonSize.compact} >Cancelar</Button>
+						<Button type="submit" size={ButtonSize.compact} className="mt-1">Entrar</Button>
+					</div>
+				</form>
+			</main>
 		</>
 	)
 }
-
-export default Login;

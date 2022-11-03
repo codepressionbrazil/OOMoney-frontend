@@ -31,8 +31,14 @@ export default function Cadastro(){
       usuario
     })
 
-    router.replace('/login')
-  }
+    if(response.status === 200) {
+      router.push('/login')
+    }
+
+    if(response.status >= 400) {
+      alert('Erro ao cadastrar usuário')
+    }
+}
 
   return(
     <main className="mt-1 flex flex-col justify-center items-center">

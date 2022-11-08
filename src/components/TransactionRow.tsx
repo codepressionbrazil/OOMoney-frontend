@@ -1,4 +1,4 @@
-import { FaPen, FaTrash } from "react-icons"
+import { FaPen, FaTrash } from "react-icons/fa"
 
 import type { Transaction } from "../types/types"
 

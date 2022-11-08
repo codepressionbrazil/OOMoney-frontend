@@ -12,7 +12,8 @@ export default function Login(){
 
 	const { execLogin } = useAuth()
 
-	async function handleLogin() {
+	async function handleLogin(e: any) {
+		e.preventDefault();
 		await execLogin(email, senha)
 	}
 

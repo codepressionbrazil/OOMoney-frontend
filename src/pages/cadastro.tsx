@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { useState } from "react"
 
 import { FormControl } from "baseui/form-control";
@@ -49,6 +48,7 @@ export default function Cadastro(){
             onChange={(e) => setNome(e.currentTarget.value)}
             placeholder="Nome"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         <FormControl label="Email">
@@ -57,6 +57,7 @@ export default function Cadastro(){
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="Email"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         <FormControl label="Senha">
@@ -64,7 +65,9 @@ export default function Cadastro(){
             value={senha}
             onChange={(e) => setSenha(e.currentTarget.value)}
             placeholder="Senha"
+            type="password"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         <FormControl label="Confirmar Senha">
@@ -72,7 +75,9 @@ export default function Cadastro(){
             value={confirmarSenha}
             onChange={(e) => setConfirmarSenha(e.currentTarget.value)}
             placeholder="Confirmar Senha"
+            type="password"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         <FormControl label="Telefone">
@@ -82,6 +87,7 @@ export default function Cadastro(){
             placeholder="Telefone"
             type="number"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         
@@ -92,6 +98,7 @@ export default function Cadastro(){
             placeholder="CPF"
             type="number"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
 
@@ -101,6 +108,7 @@ export default function Cadastro(){
             onChange={(e) => setUsuario(e.currentTarget.value)}
             placeholder="Usuário"
             size={InputSize.compact}
+            clearable
           />
         </FormControl>
         <div className="flex justify-between">

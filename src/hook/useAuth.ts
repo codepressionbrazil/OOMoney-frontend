@@ -33,7 +33,7 @@ export function useAuth() {
     cpf
   }: registerProps) {
     try {
-      const response = await api.post('/conta', {
+      const response = await api.post('/pessoa', {
         nome, email, senha, telefone, cpf, usuario
       })
 
@@ -51,9 +51,12 @@ export function useAuth() {
 
   async function execLogin(email: string, password: string): Promise<void> {
     try {
-      const { data } = await api.post("/login", { email, password });
+      const { data } = await api.post("/pessoa/login", { email, senha: password });
+      localStorage.setItem("user", JSON.stringify(data));
       saveUserToSessionStorage(data);
       setUser(data);
+
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

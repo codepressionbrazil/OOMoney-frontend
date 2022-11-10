@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { api } from "../services/api";
 
 interface User {
-  idConta: number;
+  cpf: string;
   nome: string;
   usuario: string;
   email: string;

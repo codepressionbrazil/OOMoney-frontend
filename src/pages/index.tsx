@@ -11,12 +11,16 @@ import { NewTransactionModal } from "../components/NewTransactionModal";
 // import { useTransactions } from "../context/useTransactions";
 import { useAuth } from "../hook/useAuth";
 import { useRouter } from "next/router";
+import { useTransactions } from "../context/useTransactions";
+import { TransactionRow } from "../components/TransactionRow";
+import { TransactionFromDB } from "../types/types";
 
 const Home: NextPage = () => {
   const router = useRouter()
 
   // const {} = useTransactions()
   const { user } = useAuth()
+  const { transactions } = useTransactions()
 
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
 
@@ -34,6 +38,23 @@ const Home: NextPage = () => {
     }
   }
 
+  const summary = transactions.reduce((acc, transaction) => {
+    if(transaction.tipoTransacao === 'ENTRADA') {
+      acc.deposits += transaction.valorTransacao
+      acc.total += transaction.valorTransacao
+    }
+    if(transaction.tipoTransacao === 'SAIDA') {
+      acc.withdraws += transaction.valorTransacao
+      acc.total -= transaction.valorTransacao
+    }
+
+    return acc
+  }, {
+    deposits: 0,
+    withdraws: 0,
+    total: 0
+  })
+
   return (
     <>
       <Head>
@@ -46,15 +67,15 @@ const Home: NextPage = () => {
 
       <main className="mt-20 flex flex-col items-center">
         <section className="flex w-[65%] justify-between">
-          <Summary title="Entradas" value={2000} type="deposit" />
-          <Summary title="Saídas" value={-1000} type="withdraw" />
-          <Summary title="Total" value={0} type="total" />
+          <Summary title="Entradas" value={summary.deposits} type="deposit" />
+          <Summary title="Saídas" value={summary.withdraws} type="withdraw" />
+          <Summary title="Total" value={summary.total} type="total" />
         </section>
 
         <section className="mt-8 flex justify-between w-[65%] h-10">
           <div>
             <h2 className="text-2xl font-bold">Transações</h2>
-            <p>4 transações</p>
+            <p>{transactions.length} transações</p>
           </div>
 
           <Button
@@ -67,6 +88,38 @@ const Home: NextPage = () => {
           
           <NewTransactionModal isOpen={newTransactionModalOpen} onClose={closeNewTransactionModal}/>
         </section>
+
+        <div className="mt-5 w-[60%] flex justify-center">
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th className="w-[35%]px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                  Descrição
+                </th>
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                  Valor
+                </th>
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                  Tipo
+                </th>
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                  Data
+                </th>
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            {transactions.map((transaction, index) => (
+              <tr className="w-full" key={index}>
+                <TransactionRow transaction={transaction} />
+              </tr>
+              ))
+            }
+            </tbody>
+          </table>
+        </div>
       </main>
 
     </>

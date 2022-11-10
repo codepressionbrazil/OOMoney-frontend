@@ -1,41 +1,44 @@
+import { useState } from "react"
+
 import { FaPen, FaTrash } from "react-icons/fa"
-
-import type { Transaction } from "../types/types"
-
+import type { TransactionFromDB } from "../types/types"
 import * as utils from "../utils/utils"
 
-export function TransactionRow(transaction: Transaction){
+export function TransactionRow({transaction}: {transaction: TransactionFromDB}) {
+
+  const [selectedTransaction, setSelectedTransaction] = useState<number | null>(null)
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+  function openEditModal(transactionId: number) {
+    setSelectedTransaction(transactionId)
+    setIsEditModalOpen(true)
+  }
+
   return (
     <>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 h-10 w-10">
-              <h3>{transaction.descricao}</h3>
-            </div>
-          </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-900">{utils.formatMoney(transaction["valor_transacao"])}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-            {transaction["tipo_transacao"]}
-          </span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {new Date(transaction["data_hora"]).toLocaleDateString('pt-br')}
-        </td>
-        <td>
-          <div>
-            <FaPen className="text-blue-500 cursor-pointer" />
-            <FaTrash className="text-red-500 cursor-pointer" />
-          </div>
-        </td>
-      </tr>
-
-
-        
+      <td className="w-[35%] text-left">{transaction.descricao}</td>
+      
+      <td className={transaction.tipoTransacao === 'ENTRADA' ? 'income' : 'outcome'}>
+        {utils.formatMoney(transaction.valorTransacao)}
+      </td>
+      
+      <td>{transaction.classificacao.nomeClassificao }</td>
+      
+      <td>{new Date(transaction.dataHora).toLocaleDateString()}</td>
+      
+      <td>
+        <button
+          type="button"
+          onClick={() => openEditModal(transaction.id)}
+        >
+          <FaPen />
+        </button>
+        <button type="button">
+          <FaTrash />
+        </button>
+      </td>
     </>
   )
 }

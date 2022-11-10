@@ -13,8 +13,11 @@ import { KIND } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { DatePicker } from "baseui/datepicker";
+import { Select, Value as SelectValueType } from "baseui/select";
 
 import locale from "date-fns/locale/pt-BR";
+import { format } from "date-fns";
+import { useTransactions } from "../context/useTransactions";
 
 interface NewTransactionModalProps{
   isOpen: boolean;
@@ -26,6 +29,40 @@ export function NewTransactionModal(props: NewTransactionModalProps){
   const [title, setTitle] = useState<string>("")
   const [value, setValue] = useState<number>(0)
   const [date, setDate] = useState<Date>(new Date())
+  const [type, setType] = useState<SelectValueType>([])
+  const [classification, setClassification] = useState<SelectValueType>([])
+
+  const { createTransaction, transactionClassifications } = useTransactions()
+
+  function handleCreateTransactionsClassifications() {
+    const formattedClassifications = transactionClassifications.map(classification => {
+      return {
+        label: classification.nomeClassificao,
+        id: classification.idClassificacao
+      }
+    })
+
+    return formattedClassifications;
+  }
+
+  async function handleSubmit(){
+    console.log(format(date, "yyyy-MM-dd HH:mm:ss"))
+    try {
+      const data = {
+        description: title,
+        amount: value,
+        date: format(date, "yyyy-MM-dd HH:mm:ss"),
+        transactionType: type[0]?.id,
+        idClassification: classification[0]?.id
+      }
+  
+      console.log("data", data)
+      await createTransaction(data as any)
+      props.onClose()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <Modal
@@ -57,6 +94,27 @@ export function NewTransactionModal(props: NewTransactionModalProps){
             locale={locale}
           />
         </FormControl>
+
+        <FormControl label="Tipo">
+          <Select
+            options={[
+              { label: "Saída", id: "SAIDA" },
+              { label: "Entrada", id: "ENTRADA" },
+            ]}
+            value={type}
+            onChange={({ value }) => setType(value)}
+            placeholder="Selecione o tipo"
+          />
+        </FormControl>
+
+        <FormControl label="Classificação">
+          <Select
+            options={handleCreateTransactionsClassifications()}
+            value={classification}
+            onChange={({value}) => setClassification(value)}
+            placeholder="Selecione uma classificação"
+          />
+        </FormControl>
       </ModalBody>
 
       <ModalFooter>
@@ -64,7 +122,9 @@ export function NewTransactionModal(props: NewTransactionModalProps){
           Cancelar
         </ModalButton>
         
-        <ModalButton>
+        <ModalButton
+          onClick={handleSubmit}
+        >
           Adicionar
         </ModalButton>
       </ModalFooter>

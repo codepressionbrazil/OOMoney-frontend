@@ -62,7 +62,9 @@ export function useAuth() {
     }
   }
 
-  async function execLogout(): Promise<void> {
+  function execLogout(): void {
+    sessionStorage.removeItem("user");
+    window.location.href = "/";
     setUser(null);
   }
 

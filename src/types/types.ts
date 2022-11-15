@@ -18,7 +18,7 @@ export type TransactionFromDB = {
   pessoa: any
   classificacao: {
     idClassificacao: number
-    nomeClassificacao: string
+    nomeClassificao: string
   }
 }
 

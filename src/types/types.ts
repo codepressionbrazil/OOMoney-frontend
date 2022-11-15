@@ -26,3 +26,11 @@ export type TransactionClassification = {
   idClassificacao: string;
   nomeClassificao: string;
 }
+
+export type updateData = {
+  description: string
+  amount: number
+  date: string
+  transactionType: number
+  idClassification: number
+}

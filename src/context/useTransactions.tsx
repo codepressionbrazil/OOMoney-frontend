@@ -47,26 +47,24 @@ export function TransactionProvider({children}: any): JSX.Element {
     {
       description, amount, date, transactionType, idClassification
     }: TransactionInput){
+    try { 
+      await api.post("/transacao", {
+        descricao: description,
+        valorTransacao: amount,
+        dataHora: date,
+        tipoTransacao: transactionType,
+        classificacao: {
+          idClassificacao: idClassification
+        },
+        pessoa: {
+          cpf: user?.cpf
+        }
+      })
 
-      try { 
-        await api.post("/transacao", {
-          descricao: description,
-          valorTransacao: amount,
-          dataHora: date,
-          tipoTransacao: transactionType,
-          classificacao: {
-            idClassificacao: idClassification
-          },
-          pessoa: {
-            cpf: user?.cpf
-          }
-        })
-
-        await getTransactions()
-      } catch (error) {
-        console.error(error)
-      }
-      
+      await getTransactions()
+    } catch (error) {
+      console.error(error)
+    }   
   }
 
   return (

@@ -10,6 +10,7 @@ interface TransactionContextData {
   createTransaction: (transaction: TransactionInput) => Promise<void>
   updateTransaction: (transaction: types.updateData, transactionId: number) => Promise<void>
   deleteTransaction: (transactionId: number) => Promise<void>
+  findOneTransaction: (transactionId: number) => Promise<types.TransactionFromDB>
   getTransactionClassifications: () => Promise<void>
 }
 
@@ -38,6 +39,11 @@ export function TransactionProvider({children}: any): JSX.Element {
     const {data} = await api.get(`/transacao/pessoa/${user?.cpf}`)
     console.log(transactions)
     setTransactions(data)
+  }
+
+  async function findOneTransaction(id: number){
+    const {data} = await api.get(`/transacao/${id}`)
+    return data
   }
 
   async function getTransactionClassifications(){
@@ -104,7 +110,7 @@ export function TransactionProvider({children}: any): JSX.Element {
   }
 
   return (
-    <TransactionContext.Provider value={{ transactions, transactionClassifications, getTransactionClassifications, createTransaction, updateTransaction, deleteTransaction }}>
+    <TransactionContext.Provider value={{ transactions, transactionClassifications, findOneTransaction, getTransactionClassifications, createTransaction, updateTransaction, deleteTransaction }}>
       {children}
     </TransactionContext.Provider>
   )

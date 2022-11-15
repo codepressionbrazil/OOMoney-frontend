@@ -3,6 +3,9 @@ import { useState } from "react"
 import { FaPen, FaTrash } from "react-icons/fa"
 import type { TransactionFromDB } from "../types/types"
 import * as utils from "../utils/utils"
+import { DeleteTransactionModal } from "./DeleteTransactionModal"
+
+import { EditTransactionModal } from "./EdiTransactionModal" 
 
 export function TransactionRow({transaction}: {transaction: TransactionFromDB}) {
 
@@ -15,6 +18,20 @@ export function TransactionRow({transaction}: {transaction: TransactionFromDB}) 
     setSelectedTransaction(transactionId)
     setIsEditModalOpen(true)
   }
+
+  function closeEditModal() {
+    setIsEditModalOpen(false)
+  }
+
+  function openDeleteModal(transactionId: number) {
+    setSelectedTransaction(transactionId)
+    setIsDeleteModalOpen(true)
+  }
+
+  function closeDeleteModal() {
+    setIsDeleteModalOpen(false)
+  }
+
 
   return (
     <>
@@ -35,10 +52,15 @@ export function TransactionRow({transaction}: {transaction: TransactionFromDB}) 
         >
           <FaPen />
         </button>
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => openDeleteModal(transaction.id)}
+        >
           <FaTrash />
         </button>
       </td>
+      <EditTransactionModal isOpen={isEditModalOpen} onClose={closeEditModal} transactionId={selectedTransaction as number} />
+      <DeleteTransactionModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} transactionId={selectedTransaction as number} description={transaction.descricao} />
     </>
   )
 }

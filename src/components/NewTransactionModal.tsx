@@ -46,7 +46,6 @@ export function NewTransactionModal(props: NewTransactionModalProps){
   }
 
   async function handleSubmit(){
-    console.log(format(date, "yyyy-MM-dd HH:mm:ss"))
     try {
       const data = {
         description: title,
@@ -56,7 +55,6 @@ export function NewTransactionModal(props: NewTransactionModalProps){
         idClassification: classification[0]?.id
       }
   
-      console.log("data", data)
       await createTransaction(data as any)
       props.onClose()
     } catch (error) {

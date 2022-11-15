@@ -49,8 +49,7 @@ export function TransactionProvider({children}: any): JSX.Element {
     }: TransactionInput){
 
       try { 
-        console.log(description, amount, date, transactionType, idClassification)
-        api.post("/transacao", {
+        await api.post("/transacao", {
           descricao: description,
           valorTransacao: amount,
           dataHora: date,
@@ -62,6 +61,8 @@ export function TransactionProvider({children}: any): JSX.Element {
             cpf: user?.cpf
           }
         })
+
+        await getTransactions()
       } catch (error) {
         console.error(error)
       }

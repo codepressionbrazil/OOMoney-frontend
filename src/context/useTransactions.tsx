@@ -37,7 +37,6 @@ export function TransactionProvider({children}: any): JSX.Element {
 
   async function getTransactions(){
     const {data} = await api.get(`/transacao/pessoa/${user?.cpf}`)
-    console.log(transactions)
     setTransactions(data)
   }
 

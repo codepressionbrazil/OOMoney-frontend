@@ -41,8 +41,6 @@ const ResumoPage: NextPage = () => {
       );
     });
 
-    console.log(transactionFiltered)
-
     const amountTotals = transactionFiltered.reduce(
       (acc, transaction) => {
         if (transaction.tipoTransacao === "ENTRADA") {

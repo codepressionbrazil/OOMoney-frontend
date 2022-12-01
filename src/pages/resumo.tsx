@@ -23,20 +23,20 @@ const ResumoPage: NextPage = () => {
   const { transactions } = useTransactions();
 
   async function handleGenerateSummary() {
-
+    
     const transactionFiltered = transactions.filter((transaction) => {
       const transactionDate = new Date(transaction.dataHora);
-
+            
       if (!endDate!) {
         return (
-          new Date(transactionDate).toDateString() >= new Date(initDate!).toDateString() &&
-          new Date(transactionDate).toDateString() <= new Date().toDateString()
-        );
-      }
-
-      return (
-        new Date(transactionDate).toDateString() >= new Date(initDate!).toDateString() &&
-        new Date(transactionDate).toDateString() <= new Date(endDate!).toDateString()
+          new Date(transactionDate).getTime() >= new Date(initDate!).getTime() &&
+          new Date(transactionDate).getTime() <= new Date().getTime()
+          );
+        }
+        
+        return (
+        new Date(transactionDate).getTime() >= new Date(initDate!).getTime() &&
+        new Date(transactionDate).getTime() <= new Date(endDate!).getTime()
       );
     });
 

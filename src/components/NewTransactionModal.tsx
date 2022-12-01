@@ -55,6 +55,13 @@ export function NewTransactionModal(props: NewTransactionModalProps){
         idClassification: classification[0]?.id
       }
   
+      setTitle("")
+      setValue(0)
+      setDate(new Date())
+      setType([])
+      setClassification([])
+      
+
       await createTransaction(data as any)
       props.onClose()
     } catch (error) {

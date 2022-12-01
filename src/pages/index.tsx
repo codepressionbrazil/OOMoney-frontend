@@ -85,8 +85,6 @@ const Home: NextPage = () => {
           <div className="rounder border-1">
             <Button
               onClick={openNewTransactionModal}
-              kind={ButtonKind.primary}
-              size={ButtonSize.compact}
             >
               Nova transação
             </Button>

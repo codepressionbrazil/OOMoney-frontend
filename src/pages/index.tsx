@@ -90,22 +90,22 @@ const Home: NextPage = () => {
         </section>
 
         <div className="mt-5 w-[60%] flex justify-center">
-          <table className="w-full">
+          <table className="w-full text-center">
             <thead>
               <tr>
-                <th className="w-[35%]px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                <th className="w-[35%] px-6 py-3 border-b-2 border-gray-300 text-sm leading-4 text-gray-500 uppercase tracking-wider">
                   Descrição
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-sm leading-4 text-gray-500 uppercase tracking-wider">
                   Valor
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-sm leading-4 text-gray-500 uppercase tracking-wider">
                   Tipo
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-sm leading-4 text-gray-500 uppercase tracking-wider">
                   Data
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-sm leading-4 text-gray-500 uppercase tracking-wider">
                   Ações
                 </th>
               </tr>

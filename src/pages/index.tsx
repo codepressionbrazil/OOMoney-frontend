@@ -18,9 +18,10 @@ import { TransactionFromDB } from "../types/types";
 const Home: NextPage = () => {
   const router = useRouter()
 
-  // const {} = useTransactions()
   const { user } = useAuth()
-  const { transactions } = useTransactions()
+  const { transactions, getTransactions } = useTransactions()
+
+  getTransactions()
 
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
 
@@ -54,6 +55,14 @@ const Home: NextPage = () => {
     withdraws: 0,
     total: 0
   })
+
+  if (transactions.length === 0) {
+    if(user){
+      if(typeof window !== 'undefined') {
+        router.push("/")
+      }
+    }
+  }
 
   return (
     <>

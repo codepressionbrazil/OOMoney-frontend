@@ -7,6 +7,7 @@ import { useAuth } from '../hook/useAuth'
 interface TransactionContextData {
   transactions: types.TransactionFromDB[]
   transactionClassifications: types.TransactionClassification[]
+  getTransactions: () => Promise<void>
   createTransaction: (transaction: TransactionInput) => Promise<void>
   updateTransaction: (transaction: types.updateData, transactionId: number) => Promise<void>
   deleteTransaction: (transactionId: number) => Promise<void>
@@ -70,7 +71,6 @@ export function TransactionProvider({children}: any): JSX.Element {
 
       await getTransactions()
     } catch (error) {
-      console.error(error)
     }   
   }
 
@@ -95,7 +95,6 @@ export function TransactionProvider({children}: any): JSX.Element {
       await getTransactions()
       
     } catch (error) {
-      console.error(error)
     }
   }
 
@@ -104,12 +103,11 @@ export function TransactionProvider({children}: any): JSX.Element {
       await api.delete(`/transacao/${transactionId}`)
       await getTransactions()
     } catch (error) {
-      console.error(error)
     }
   }
 
   return (
-    <TransactionContext.Provider value={{ transactions, transactionClassifications, findOneTransaction, getTransactionClassifications, createTransaction, updateTransaction, deleteTransaction }}>
+    <TransactionContext.Provider value={{ transactions, transactionClassifications, findOneTransaction, getTransactionClassifications, getTransactions, createTransaction, updateTransaction, deleteTransaction }}>
       {children}
     </TransactionContext.Provider>
   )

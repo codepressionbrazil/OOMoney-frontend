@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { api } from "../services/api";
+import { useTransactions } from "../context/useTransactions";
 
 interface User {
   cpf: string;
@@ -21,6 +22,8 @@ interface registerProps {
 
 export function useAuth() {
   const router = useRouter()
+
+  const { getTransactions } = useTransactions()
 
   const [user, setUser] = useState<User | null>(getUserFromSessionStorage());
 
@@ -45,7 +48,6 @@ export function useAuth() {
         throw new Error(response.data.message)
       }
     } catch (error) {
-      console.error(error);
     }
   }
 
@@ -58,7 +60,6 @@ export function useAuth() {
 
       router.push("/");
     } catch (error) {
-      console.error(error);
     }
   }
 

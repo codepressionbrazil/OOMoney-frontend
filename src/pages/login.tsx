@@ -4,8 +4,12 @@ import { Button, SIZE as ButtonSize } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 
 import { useAuth } from "../hook/useAuth";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Login(){
+
+	const router = useRouter()
 
 	const [email, setEmail] = useState<string>('')
 	const [senha, setSenha] = useState<string>('')
@@ -41,7 +45,9 @@ export default function Login(){
 						/>
 					</FormControl>
 					<div className="flex justify-between mt-1">
-						<Button type="reset" size={ButtonSize.compact}>Cancelar</Button>
+						<Link href={"/cadastro"}>
+							<Button size={ButtonSize.compact}>Cadastre-se</Button>
+						</Link>
 						<Button
 							type="submit"
 							size={ButtonSize.compact}

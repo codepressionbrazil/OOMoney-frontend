@@ -5,6 +5,7 @@ import { Input, SIZE as InputSize } from "baseui/input";
 import { Button, KIND as ButtonKind } from "baseui/button";
 
 import { useAuth } from "../hook/useAuth";
+import Link from "next/link";
 
 export default function Cadastro(){
 
@@ -112,7 +113,9 @@ export default function Cadastro(){
           />
         </FormControl>
         <div className="flex justify-between">
-          <Button type="reset" kind={ButtonKind.secondary}>Cancelar</Button>
+          <Link href={"/login"}>
+            <Button kind={ButtonKind.secondary}>Cancelar</Button>
+          </Link>
           <Button type="submit">Cadastrar</Button>
         </div>
       </form>

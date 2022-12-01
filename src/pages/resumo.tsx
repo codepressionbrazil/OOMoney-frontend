@@ -29,14 +29,14 @@ const ResumoPage: NextPage = () => {
             
       if (!endDate!) {
         return (
-          new Date(new Date(transactionDate).getTime()).toDateString() >= new Date(new Date(initDate!).getTime()).toDateString() &&
-          new Date(new Date(transactionDate).getTime()).toDateString() <= new Date(new Date().getTime()).toDateString()
+          new Date(new Date(transactionDate).toDateString()).getTime() >= new Date(new Date(initDate!).toDateString()).getTime() &&
+          new Date(new Date(transactionDate).toDateString()).getTime() <= new Date(new Date().toDateString()).getTime()
           );
         }
         
         return (
-        new Date(new Date(transactionDate).getTime()).toDateString() >= new Date(new Date(initDate!).getTime()).toDateString() &&
-        new Date(new Date(transactionDate).getTime()).toDateString() <= new Date(new Date(endDate!).getTime()).toDateString()
+          new Date(new Date(transactionDate).toDateString()).getTime() >= new Date(new Date(initDate!).toDateString()).getTime() &&
+          new Date(new Date(transactionDate).toDateString()).getTime() <= new Date(new Date(endDate!).toDateString()).getTime()
       );
     });
 
